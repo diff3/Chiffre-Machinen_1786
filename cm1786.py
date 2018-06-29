@@ -9,7 +9,7 @@ config_file.read("config.ini")
 config = dict(config_file.items('default'))
 
 
-class StartGenerate(argparse.Action):
+class generate_chiper_alphabet_action(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         print("Generate new chiper alphabet")
         data = module.crypto_table_dictionary_generate(int(config['num']), config['alphabet'])
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     group2.add_argument('-i', '--input', help='Open file to encrypt.')
 
     parser.add_argument('-a', '--alter', help='Alter start position.')
-    parser.add_argument('-g', "--generate', help='Generates a new chiper alpabeth, can't be used with other flags", action=StartGenerate, nargs=0)
+    parser.add_argument('-g', '--generate', help="Generates a new chiper alphabet, can't be used with other flags", action=generate_chiper_alphabet_action, nargs=0)
     parser.add_argument('-o', '--output', help='Save encrypted text to file.')
 
     args, unknown = parser.parse_known_args()
